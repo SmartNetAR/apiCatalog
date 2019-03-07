@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['api']], function () {
-    Route::get('objects', 'ObjectsController@index');
     Route::post('objects', 'ObjectsController@store');
+    Route::get('objects', 'ObjectsController@index');
 });
