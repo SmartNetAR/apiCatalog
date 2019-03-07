@@ -18,9 +18,10 @@ class CreateObjectsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('location');
-            $table->string('sub-location');
+            $table->string('sub_location');
             $table->string('category');
             $table->string('tag');
+            $table->string('url_image');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

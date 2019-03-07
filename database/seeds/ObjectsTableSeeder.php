@@ -3,6 +3,7 @@
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class ObjectsTableSeeder extends Seeder
 {
@@ -13,16 +14,20 @@ class ObjectsTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
+
         $user= DB::table('users')->select('id')->first();
-        
-        DB::table('objects')->insert([
-            'name' => Str::random(10),
-            'description' => Str::random(30),
-            'location' => Str::random(20),
-            'sub-location' => Str::random(30),
-            'category' => Str::random(20),
-            'tag' => Str::random(15),
-            'user_id' => $user->id
-        ]);
+        for ( $i = 0; $i < 30; $i++ ) {
+            DB::table('objects')->insert([
+                'name' =>           $faker->sentence($nbWords = 3, $variableNbWords = true),
+                'description' =>    $faker->paragraph($nbSentences = 1, $variableNbSentences = true),
+                'location' =>       Str::random(20),
+                'sub_location' =>   Str::random(30),
+                'category' =>       Str::random(20),
+                'tag' =>            Str::random(15),
+                'url_image' =>      $faker->url(),
+                'user_id' =>        $user->id
+            ]);
+        }
     }
 }
