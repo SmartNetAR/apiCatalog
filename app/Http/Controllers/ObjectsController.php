@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Object;
 use Illuminate\Http\Request;
 use Validator;
+use App\Catalog\Object\ObjectRepo;
 
 class ObjectsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $objectRepo ;
+
+    public function __construct (ObjectRepo $objectRepo)
+    {
+        $this->objectRepo = $objectRepo;
+    }
+    
     public function index()
     {
-        $objects = Object::get();
+        $objects = $this->objectRepo->getAll();
         return $objects;
     }
 
@@ -60,20 +63,14 @@ class ObjectsController extends Controller
         //     return response()->json( [ 'message' => 'The description alredy exist' ], 422 );
         // }        
         
-        $object = Object::create( $input ) ;
+        $object = $this->objectRepo->create( $input ) ;
 
         return response()->json( [ 'Object' => $object ], 200 );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Object  $object
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Object $object)
+    public function show( $id)
     {
-        //
+        return $this->objectRepo->findOrFail( $id ) ;
     }
 
     /**
