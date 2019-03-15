@@ -1,4 +1,11 @@
 <?php
+/**
+ * @author Leonardo Casales
+ * @email leonardo@smartnet.com.ar
+ * @create date 2019-03-11 21:00:26
+ * @modify date 2019-03-11 21:00:26
+ * @desc [description]
+ */
 
 use Illuminate\Http\Request;
 
@@ -20,4 +27,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['api']], function () {
     Route::post('objects', 'ObjectsController@store');
     Route::get('objects', 'ObjectsController@index');
+    Route::post('photos', 'ObjectsController@updatePhoto');
 });

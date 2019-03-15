@@ -1,4 +1,11 @@
 <?php
+/**
+ * @author Leonardo Casales
+ * @email leonardo@smartnet.com.ar
+ * @create date 2019-03-11 20:59:54
+ * @modify date 2019-03-11 20:59:54
+ * @desc [description]
+ */
 
 namespace App\Http\Controllers;
 
@@ -6,6 +13,7 @@ use App\Object;
 use Illuminate\Http\Request;
 use Validator;
 use App\Catalog\Object\ObjectRepo;
+use Illuminate\Sopport\Facades\Storage; 
 
 class ObjectsController extends Controller
 {
@@ -49,7 +57,6 @@ class ObjectsController extends Controller
             'sub_location'      => 'required',
             'category'          => 'required',
             'tag'               => 'required',
-            'url_image'         => 'required',
             'user_id'           => 'required',
         ]);
     
@@ -66,6 +73,30 @@ class ObjectsController extends Controller
         $object = $this->objectRepo->create( $input ) ;
 
         return response()->json( [ 'Object' => $object ], 200 );
+    }
+
+    public function updatePhoto(Request $request) {
+
+        // if ( request()->file('image') ) {
+        //     return response()->json( [ 'Object' => 'hay imagen' ], 200 );
+            
+        if ( !$request->hasFile('image') )
+            return response()->json( [ 'message' => 'file not finded' ], 200 ) ;
+
+        $image = $request->image ;
+
+        if( str_contains( $request->imageName, 'jpeg' ) )
+            $extension = 'jpg' ;
+        else
+            $extension = 'png' ;
+
+        $fileName = str_random().'.'.$extension ;
+
+        $path = public_path().'/'.$fileName ;
+
+        $image->move( public_path().'/images/', $fileName);
+
+        return response()->json( [ 'message' => 'file uploaded' ], 200 );
     }
 
     public function show( $id)

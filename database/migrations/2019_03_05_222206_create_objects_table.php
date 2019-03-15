@@ -21,7 +21,7 @@ class CreateObjectsTable extends Migration
             $table->string('sub_location');
             $table->string('category');
             $table->string('tag');
-            $table->string('url_image');
+            $table->string('url_image')->nulleable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

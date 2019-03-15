@@ -1,4 +1,11 @@
 <?
+/**
+ * @author Leonardo Casales
+ * @email leonardo@smartnet.com.ar
+ * @create date 2019-03-11 21:00:39
+ * @modify date 2019-03-11 21:00:39
+ * @desc [description]
+ */
 
 namespace App\Catalog\Object;
 

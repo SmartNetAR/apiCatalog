@@ -1,4 +1,11 @@
 <?php
+/**
+ * @author Leonardo Casales
+ * @email leonardo@smartnet.com.ar
+ * @create date 2019-03-11 20:59:19
+ * @modify date 2019-03-11 20:59:19
+ * @desc [description]
+ */
 
 namespace App\Catalog\Object;
 use App\Catalog\Object\ObjectRepo;
